@@ -1,0 +1,22 @@
+# ============================
+# Podstawowe pliki Pythona
+# ============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ============================
+# Srodowiska wirtualne
+# ============================
+.venv/
+venv/
+env/
+ENV/
+.venv*/
+pip-wheel-metadata/
+
+# ============================
+# Konfiguracje IDE / edytorow
+# ============================
+.idea/
+*.iml
