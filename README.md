@@ -6,3 +6,4 @@ Zbiór narzędzi wspomagających realizację zadań administracyjnych na serwera
 ## Wymagania
 - Python 3.14+
 - Python Packages:
+  - pyside6
