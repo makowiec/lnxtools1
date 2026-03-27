@@ -11,25 +11,32 @@ INFO, OK, WARNING i ERROR
 import sys
 
 from PySide6.QtWidgets import (
-    QApplication,
-    QMainWindow,
-    QWidget,
-    QVBoxLayout,
-    QMessageBox,
+    QApplication, QMainWindow, QWidget,
+    QVBoxLayout, QMessageBox,
 )
 from PySide6.QtGui import QAction
 
+from src.lnxtools.core.theme_manager import ThemeManager
+
 
 class MainWindow(QMainWindow):
-    """Główne okno aplikacji lnxtools."""
+    """Glowne okno aplikacji lnxtools."""
 
     def __init__(self):
         super().__init__()
+
+        # Inicjalizacja ThemeManagera
+        self.theme_manager = ThemeManager()
+
+        # Nazwa i rozmiary okna
         self.setWindowTitle("Lnxtools")
         self.resize(1100, 700)
 
         # Tworzenie menu gornego
-        self._create_menu_bar()
+        self.create_menu_bar()
+
+        # Dodatkowe zabezpieczenie
+        self.apply_initial_theme()
 
         # Centralny widget
         central_widget = QWidget()
@@ -39,8 +46,8 @@ class MainWindow(QMainWindow):
 
         self.statusBar().showMessage("Gotowy do pracy")
 
-    def _create_menu_bar(self):
-        """Tworzy pasek menu z pozycjami Bash i Send."""
+    def create_menu_bar(self):
+        """Tworzy pasek menu z pozycjami."""
         menubar = self.menuBar()
 
         # Menu Bash
@@ -94,14 +101,15 @@ class MainWindow(QMainWindow):
         # Menu Theme
         theme_menu = menubar.addMenu("Theme")
 
-        themelight_action = QAction("Light", self)
-        themelight_action.triggered.connect(lambda: self.on_theme_selected("Light"))
+        # Tryb jasny
+        light_action = QAction("Light", self)
+        light_action.triggered.connect(lambda: self.change_theme("light"))
+        theme_menu.addAction(light_action)
 
-        themedark_action = QAction("Dark", self)
-        themedark_action.triggered.connect(lambda: self.on_theme_selected("Dark"))
-
-        theme_menu.addAction(themelight_action)
-        theme_menu.addAction(themedark_action)
+        # Tryb ciemny
+        dark_action = QAction("Dark", self)
+        dark_action.triggered.connect(lambda: self.change_theme("dark"))
+        theme_menu.addAction(dark_action)
 
         # Menu About
         about_menu = menubar.addMenu("About")
@@ -113,33 +121,36 @@ class MainWindow(QMainWindow):
 
     # ====================== AKCJE MENU ======================
     def on_bash_selected(self, bash_type: str):
-        """Wywoływane po wybraniu Bash1 lub Bash2."""
-        QMessageBox.information(self, "Bash", f"Wybrano: {bash_type}\nTutaj w przyszłości uruchomisz skrypt Bash.")
+        """Wywolywane po wybraniu Bash1 lub Bash2."""
+        QMessageBox.information(self, "Bash", f"Wybrano: {bash_type}\nTutaj w przyszlosci uruchomisz skrypt Bash.")
         self.statusBar().showMessage(f"Wybrano {bash_type}")
 
     def on_send_selected(self, send_type: str):
-        """Wywoływane po wybraniu Send."""
-        QMessageBox.information(self, "Send", f"Wybrano: {send_type}\nTutaj w przyszłości uruchomisz skrypt Send.")
+        """Wywolywane po wybraniu Send."""
+        QMessageBox.information(self, "Send", f"Wybrano: {send_type}\nTutaj w przyszlosci uruchomisz skrypt Send.")
         self.statusBar().showMessage(f"Wybrano {send_type}")
 
     def on_infra_selected(self, infra_type: str):
-        """Wywoływane po wybraniu LnxImp lub DataImp lub Raport."""
-        QMessageBox.information(self, "Infra", f"Wybrano: {infra_type}\nTutaj w przyszłości uruchomisz skrypt Infra.")
+        """Wywolywane po wybraniu LnxImp lub DataImp lub Raport."""
+        QMessageBox.information(self, "Infra", f"Wybrano: {infra_type}\nTutaj w przyszlosci uruchomisz skrypt Infra.")
         self.statusBar().showMessage(f"Wybrano {infra_type}")
 
     def on_tools_selected(self, tools_type: str):
-        """Wywoływane po wybraniu Arch lub Export."""
-        QMessageBox.information(self, "Tools", f"Wybrano: {tools_type}\nTutaj w przyszłości uruchomisz skrypt Tools.")
+        """Wywolywane po wybraniu Arch lub Export."""
+        QMessageBox.information(self, "Tools", f"Wybrano: {tools_type}\nTutaj w przyszlosci uruchomisz skrypt Tools.")
         self.statusBar().showMessage(f"Wybrano {tools_type}")
 
-    def on_theme_selected(self, theme_type: str):
-        """Wywoływane po wybraniu Light lub Dark."""
-        QMessageBox.information(self, "Theme", f"Wybrano: {theme_type}\nTutaj w przyszłości uruchomisz skrypt Theme.")
-        self.statusBar().showMessage(f"Wybrano {theme_type}")
+    def change_theme(self, theme_name: str):
+        """Zmiana motywu z menu"""
+        self.theme_manager.set_theme(theme_name)
+
+    def apply_initial_theme(self):
+        """Zapewnia, ze motyw zostanie zastosowany od razu po uruchomieniu"""
+        self.theme_manager.apply_global_stylesheet()
 
     def on_about_selected(self, about_type: str):
-        """Wywoływane po wybraniu About."""
-        QMessageBox.information(self, "About", f"Wybrano: {about_type}\nTutaj w przyszłości uruchomisz skrypt About.")
+        """Wywolywane po wybraniu About."""
+        QMessageBox.information(self, "About", f"Wybrano: {about_type}\nTutaj w przyszlosci uruchomisz skrypt About.")
         self.statusBar().showMessage(f"Wybrano {about_type}")
 
 

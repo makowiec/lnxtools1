@@ -6,41 +6,50 @@ Zawiera zmienne i ustawienia globalne dla programu.
 """
 
 import json
-import shutil
-from pathlib import Path
+from src.lnxtools.utils.paths import SETTINGS_FILE
 
-# Glowny katalog aplikacji
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+# Domyslne ustawienia aplikacji – wszystkie nowe ustawienia dodajemy tutaj
+DEFAULT_SETTINGS = {
+    "theme": "dark",
+    "language": "pl",
+    "window_geometry": None,      # [x, y, width, height]
+    "maximized": False,
+    "last_used_tool": None,
+    "show_tooltips": True,
+}
 
-# Katalogi poza src
-DATA_DIR = BASE_DIR / "data"
-CONFIG_DIR = BASE_DIR / "config"
-LOGS_DIR = DATA_DIR / "logs"
 
-for directory in (DATA_DIR, CONFIG_DIR, LOGS_DIR):
-    directory.mkdir(parents=True, exist_ok=True)
+def load_settings() -> dict:
+    """
+    Wczytuje ustawienia uzytkownika.
+    Przy pierwszym uruchomieniu tworzy plik settings.json z wartosciami domyslnymi.
+    """
+    if not SETTINGS_FILE.exists():
+        print("→ Tworze nowy plik settings.json z ustawieniami domyslnymi.")
+        save_settings(DEFAULT_SETTINGS)
+        return DEFAULT_SETTINGS.copy()
 
-# Katalogi src
-SRC_DIR = BASE_DIR / "src"
-LNXTOOLS_DIR = SRC_DIR / "lnxtools"
-CORE_DIR = LNXTOOLS_DIR / "core"
-GUI_DIR = LNXTOOLS_DIR / "gui"
-TEMPLATES_DIR = LNXTOOLS_DIR / "templates"
+    try:
+        with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
+            user_settings = json.load(f)
 
-# Ustawienia uzytkownika lub domyslne
-SETTINGS_FILE = CONFIG_DIR / "settings.json"
-DEFAULT_SETTINGS_FILE = TEMPLATES_DIR / "settings.default.json"
+        # Bezpieczny merge: DEFAULT_SETTINGS + ustawienia uzytkownika (uzytkownik nadpisuje)
+        merged = DEFAULT_SETTINGS.copy()
+        merged.update(user_settings)
+        return merged
 
-# Pierwsze uruchomienie – kopiowanie settings.default.json
-if not SETTINGS_FILE.exists():
-    shutil.copy(DEFAULT_SETTINGS_FILE, SETTINGS_FILE)
+    except Exception as e:
+        print(f"Uwaga: Blad odczytu settings.json ({e}). Tworze nowy plik z domyslnymi ustawieniami.")
+        save_settings(DEFAULT_SETTINGS)
+        return DEFAULT_SETTINGS.copy()
 
-# Wczytanie konfiguracji
-with open(DEFAULT_SETTINGS_FILE, "r", encoding="utf-8") as f:
-    _defaults = json.load(f)
 
-with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
-    _user = json.load(f)
-
-# Merge: user > defaults
-CONFIG = {**_defaults, **_user}
+def save_settings(settings: dict) -> None:
+    """
+    Zapisuje ustawienia do pliku config/settings.json
+    """
+    try:
+        with open(SETTINGS_FILE, "w", encoding="utf-8") as f:
+            json.dump(settings, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"Blad zapisu settings.json: {e}")

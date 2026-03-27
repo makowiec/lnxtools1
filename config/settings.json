@@ -1,3 +1,8 @@
 {
-  "theme": "dark"
+  "theme": "dark",
+  "language": "pl",
+  "window_geometry": null,
+  "maximized": false,
+  "last_used_tool": null,
+  "show_tooltips": true
 }

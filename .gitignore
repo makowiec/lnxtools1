@@ -20,3 +20,7 @@ pip-wheel-metadata/
 # ============================
 .idea/
 *.iml
+# ============================
+# Konfiguracja uzytkonika
+# ============================
+config/settings.json
