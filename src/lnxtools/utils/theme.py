@@ -186,7 +186,7 @@ QMenuBar {{
 
 QMenuBar::item {{
     font-size: 12pt;
-    #padding: 6px 10px;
+    padding: 2px 4px 2px 4px;
 }}
 
 QMenu {{
@@ -195,12 +195,18 @@ QMenu {{
 
 QMenu::item {{
     font-size: 12pt;
-    #padding: 8px 12px 8px 8px;
-    min-height: 24px;     /* pomaga przy większej czcionce */
+    padding: 2px 12px 2px 8px;
+    min-height: 24px;     /* pomaga przy wiekszej czcionce */
 }}
 
 QMenu::item:selected {{
-    /* styl przy zaznaczeniu */
+    background-color: #ff8c00;    /* pomaranczowy */
+    color: #000000;               /* kontrastowy kolor tekstu */
+}}
+
+QMenuBar::item:selected {{
+    background-color: #ff8c00;
+    color: #000000;
 }}
 """
 
@@ -318,7 +324,7 @@ QMenuBar {{
 
 QMenuBar::item {{
     font-size: 12pt;
-    #padding: 6px 10px;
+    padding: 2px 4px 2px 4px;
 }}
 
 QMenu {{
@@ -327,12 +333,18 @@ QMenu {{
 
 QMenu::item {{
     font-size: 12pt;
-    #padding: 8px 12px 8px 8px;
-    #min-height: 24px;     /* pomaga przy większej czcionce */
+    padding: 2px 12px 2px 8px;
+    min-height: 24px;    /* pomaga przy wiekszej czcionce */
 }}
 
 QMenu::item:selected {{
-    /* styl przy zaznaczeniu */
+    background-color: #ff8c00;    /* pomaranczowy */
+    color: #ffffff;               /* kontrastowy kolor tekstu */
+}}
+
+QMenuBar::item:selected {{
+    background-color: #ff8c00;
+    color: #ffffff;
 }}
 """
 

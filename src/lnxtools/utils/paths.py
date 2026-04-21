@@ -6,9 +6,12 @@ Zawiera globalne sciezki dla programu.
 """
 
 from pathlib import Path
+import sys
+from typing import Optional
 
 # Glowny katalog aplikacji (portable)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+PACKAGE_DIR = Path(__file__).resolve().parent.parent
 
 # Katalogi poza src/
 DATA_DIR = BASE_DIR / "data"
@@ -36,3 +39,15 @@ def get_data_dir() -> Path:
 
 def get_config_dir() -> Path:
     return CONFIG_DIR
+
+
+def resource_path(relative_path: str) -> Path:
+    """Ikona programu."""
+    base_path: Optional[str] = getattr(sys, "_MEIPASS", None)
+
+    if base_path:
+        return Path(base_path) / "lnxtools" / relative_path
+
+    return PACKAGE_DIR / relative_path
+
+ICON_PATH = resource_path("resources/icons/lnxtools.ico")

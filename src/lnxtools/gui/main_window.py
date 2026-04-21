@@ -14,9 +14,13 @@ from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget,
     QVBoxLayout, QMessageBox,
 )
-from PySide6.QtGui import QAction
+from PySide6.QtGui import (
+    QAction, QIcon
+)
 
 from src.lnxtools.core.theme_manager import ThemeManager
+
+from src.lnxtools.utils.paths import ICON_PATH
 
 
 class MainWindow(QMainWindow):
@@ -161,5 +165,9 @@ def launch_application() -> None:
 
     window = MainWindow()
     window.show()
+
+    # Dodanie ikony programu
+    if ICON_PATH.exists():
+        app.setWindowIcon(QIcon(str(ICON_PATH)))
 
     sys.exit(app.exec())
