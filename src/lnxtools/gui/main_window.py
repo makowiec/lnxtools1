@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
 
         # Nazwa i rozmiary okna
         self.setWindowTitle("Lnxtools")
-        self.resize(1100, 700)
+        self.resize(1200, 800)
 
         # Tworzenie menu gornego
         self.create_menu_bar()
