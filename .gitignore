@@ -20,7 +20,15 @@ pip-wheel-metadata/
 # ============================
 .idea/
 *.iml
+
 # ============================
 # Konfiguracja uzytkonika
 # ============================
 config/settings.json
+
+# ============================
+# Build
+# ============================
+build/
+dist/
+lnxtools.spec
