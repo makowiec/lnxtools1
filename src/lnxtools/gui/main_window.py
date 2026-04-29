@@ -36,6 +36,10 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Lnxtools")
         self.resize(1200, 800)
 
+        # Ikona okna programu
+        if ICON_PATH.exists():
+            self.setWindowIcon(QIcon(str(ICON_PATH)))
+
         # Tworzenie menu gornego
         self.create_menu_bar()
 
