@@ -18,7 +18,10 @@ from PySide6.QtGui import (
     QAction, QIcon
 )
 
+from src.version import VERSION, COMMIT, BRANCH
+
 from src.lnxtools.core.theme_manager import ThemeManager
+from src.lnxtools.core.logger import info, ok, warning
 
 from src.lnxtools.utils.paths import ICON_PATH
 
@@ -53,6 +56,8 @@ class MainWindow(QMainWindow):
         main_layout.setSpacing(15)
 
         self.statusBar().showMessage("Gotowy do pracy")
+
+        ok(f"Uruchomienie lnxtools: {VERSION} ({COMMIT}) on branch {BRANCH}")
 
     def create_menu_bar(self):
         """Tworzy pasek menu z pozycjami."""

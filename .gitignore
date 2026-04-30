@@ -32,3 +32,13 @@ config/settings.json
 build/
 dist/
 lnxtools.spec
+
+# ============================
+# Pomocnicze
+# ============================
+ToDo.txt
+
+# ============================
+# Dane uzytkownika
+# ============================
+data/

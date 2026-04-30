@@ -1,0 +1,3 @@
+VERSION = "0"
+COMMIT = "0"
+BRANCH = "0"

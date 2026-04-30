@@ -18,6 +18,9 @@ DATA_DIR = BASE_DIR / "data"
 CONFIG_DIR = BASE_DIR / "config"
 LOGS_DIR = DATA_DIR / "logs"
 
+# Pliki poza src/
+LOG_FILE = LOGS_DIR / "app.log"
+
 # Tworzenie katalogow (bezpieczne przy kazdym imporcie)
 for directory in (DATA_DIR, CONFIG_DIR, LOGS_DIR):
     directory.mkdir(parents=True, exist_ok=True)
@@ -41,7 +44,7 @@ def get_config_dir() -> Path:
     return CONFIG_DIR
 
 def resource_path(relative_path: str) -> Path:
-    """Ikona programu."""
+    """Ikona programu"""
     base_path: Optional[str] = getattr(sys, "_MEIPASS", None)
 
     if base_path:
