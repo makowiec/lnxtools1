@@ -18,10 +18,10 @@ from PySide6.QtGui import (
     QAction, QIcon
 )
 
-from src.version import VERSION, COMMIT, BRANCH
+from src.lnxtools.version import VERSION, COMMIT, BRANCH
 
 from src.lnxtools.core.theme_manager import ThemeManager
-from src.lnxtools.core.logger import info, ok, warning
+from src.lnxtools.core.logger import ok
 
 from src.lnxtools.utils.paths import ICON_PATH
 
