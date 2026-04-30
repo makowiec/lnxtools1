@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Lnxtools")
         self.resize(1200, 800)
 
-        # Ikona okna programu
+        # Ikona ikony programu
         if ICON_PATH.exists():
             self.setWindowIcon(QIcon(str(ICON_PATH)))
 

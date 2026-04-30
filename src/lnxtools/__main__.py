@@ -25,12 +25,12 @@ root = Path(__file__).resolve().parents[2]  # przejscie dwa pozimy w gore
 if str(root) not in sys.path:
     sys.path.insert(0, str(root))
 
-# WAŻNE: Setup katalogów przed importem GUI
+# Setup katalogow przed importem GUI
 from installer import setup_directories
 
 exe_dir, config_dir, data_dir = setup_directories()
 
-# Ustawienie zmiennych środowiskowych dla aplikacji
+# Ustawienie zmiennych srodowiskowych dla aplikacji
 os.environ['LNXTOOLS_CONFIG'] = str(config_dir)
 os.environ['LNXTOOLS_DATA'] = str(data_dir)
 os.environ['LNXTOOLS_ROOT'] = str(exe_dir)

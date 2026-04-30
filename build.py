@@ -1,28 +1,27 @@
-# build.py
+# -*- coding: utf-8 -*-
 """
-Skrypt do budowania przenośnego pliku EXE
+Modul: lnxtools/build.py
+
+Skrypt do budowania pliku EXE w wersji portable
 """
 import PyInstaller.__main__
-import os
-import sys
 
 
 def build_executable():
-    """Buduje przenośny plik EXE"""
+    """Buduje plik EXE w wersji portable"""
 
     # Parametry PyInstallera
     params = [
-        'main.py',  # Główny plik wejścia
+        'main.py',  # Glowny plik wejscia
         '--name=lnxtools',  # Nazwa aplikacji
         '--windowed',  # Bez konsoli (dla GUI)
         '--onefile',  # Jeden plik EXE
-        '--add-data=src:src',  # Dodaj katalog src
-        '--add-data=config:config',  # Dodaj katalog config
-        '--add-data=data:data',  # Dodaj katalog data
-        '--add-data=src/lnxtools/resources/icons/lnxtools.ico:src/lnxtools/resources/icons',  # Dodaj resources z ikoną
+        '--add-data=config:config',  # Dodanie katalogu config
+        '--add-data=data:data',  # Dodanie katalogu data
+        '--add-data=src/lnxtools/resources/icons/lnxtools.ico:resources/icons',  # Dodanie resources z ikona
         '--hidden-import=PySide6',  # Ukryte importy
-        '--icon=src/lnxtools/resources/icons/lnxtools.ico',  # Ikona (dla EXE)
-        '--distpath=dist',  # Katalog wyjściowy
+        '--icon=src/lnxtools/resources/icons/lnxtools.ico',  # Ikona dla pliku EXE
+        '--distpath=dist',  # Katalog wyjsciowy
         '--workpath=build',  # Katalog budowania
         '--specpath=.',  # Katalog spec
     ]
@@ -30,12 +29,12 @@ def build_executable():
     PyInstaller.__main__.run(params)
 
     print("\n" + "=" * 50)
-    print("Budowanie zakończone!")
+    print("Budowanie zakobczone!")
     print("=" * 50)
     print("Plik EXE znajduje się w: dist/lnxtools.exe")
-    print("\nAby rozprowadzać aplikację:")
+    print("\nAby rozprowadzac aplikację:")
     print("1. Skopiuj plik dist/lnxtools.exe do wyznaczonego katalogu")
-    print("2. Katalogi 'config' i 'data' zostaną utworzone automatycznie")
+    print("2. Katalogi 'config' i 'data' zostana utworzone automatycznie")
     print("=" * 50)
 
 
