@@ -10,7 +10,14 @@ import sys
 from typing import Optional
 
 # Glowny katalog aplikacji (portable)
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+# Obslugi zarowno uruchamiania ze zrodla jak i z PyInstaller
+if getattr(sys, 'frozen', False):
+    # PyInstaller - katalog exe
+    BASE_DIR = Path(sys.executable).parent
+else:
+    # Uruchamianie ze zrodla
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+
 PACKAGE_DIR = Path(__file__).resolve().parent.parent
 
 # Katalogi poza src/
