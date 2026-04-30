@@ -16,8 +16,6 @@ def build_executable():
         '--name=lnxtools',  # Nazwa aplikacji
         '--windowed',  # Bez konsoli (dla GUI)
         '--onefile',  # Jeden plik EXE
-        '--add-data=config:config',  # Dodanie katalogu config
-        '--add-data=data:data',  # Dodanie katalogu data
         '--add-data=src/lnxtools/resources/icons/lnxtools.ico:resources/icons',  # Dodanie resources z ikona
         '--hidden-import=PySide6',  # Ukryte importy
         '--icon=src/lnxtools/resources/icons/lnxtools.ico',  # Ikona dla pliku EXE

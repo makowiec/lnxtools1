@@ -17,23 +17,12 @@ __version__ = "0.1.0"
 __author__ = "Lukasz M"
 
 import sys
-import os
 from pathlib import Path
 
 # Dodanie sciezki do src na potrzeby pyCharm i Python by byl widzialy katalog lnxtools
 root = Path(__file__).resolve().parents[2]  # przejscie dwa pozimy w gore
 if str(root) not in sys.path:
     sys.path.insert(0, str(root))
-
-# Setup katalogow przed importem GUI
-from installer import setup_directories
-
-exe_dir, config_dir, data_dir = setup_directories()
-
-# Ustawienie zmiennych srodowiskowych dla aplikacji
-os.environ['LNXTOOLS_CONFIG'] = str(config_dir)
-os.environ['LNXTOOLS_DATA'] = str(data_dir)
-os.environ['LNXTOOLS_ROOT'] = str(exe_dir)
 
 
 def main() -> None:
